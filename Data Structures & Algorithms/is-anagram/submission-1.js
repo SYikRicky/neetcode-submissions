@@ -1,0 +1,47 @@
+class Solution {
+    /**
+     * @param {string} s
+     * @param {string} t
+     * @return {boolean}
+     */
+    isAnagram(s, t) {
+        const map1 = new Map();
+        
+        for (let i in s) {
+            if (!map1.has(s[i])) map1.set(s[i], 0);
+            map1.set(s[i], map1.get(s[i]) + 1);
+        }
+        
+
+        const map2 = new Map();
+        map1.entries().forEach(i => (map2.set(i[0],i[1])))
+        
+
+        for (let j in t) {
+            if(map1.has(t[j])) {
+                map1.set(t[j], map1.get(t[j]) + 1);
+                console.log(`${s[1]} : ${map1.get(s[j]) - 1} -> ${map1.get(s[j])}`)
+            } else {
+                return false;
+            }
+        }
+
+        console.log(map1);
+        console.log(map2);
+
+        let arr1 = [];
+        let arr2 = [];
+        
+        map1.values().forEach(n => arr1 += Math.floor(n/2));
+        map2.values().forEach(n => arr2 += n);
+
+        console.log(arr1)
+        console.log(arr2)
+
+        if (arr1 === arr2) {
+            return true;
+        }
+
+        return false;
+    }
+}
